@@ -4,7 +4,7 @@
  * Plugin Name: MS-Studio Protect Email
  * Plugin URI: https://github.com/ms-studio/protect-email/
  * Description: Helper plugin for email display
- * Version: 1.0.0+build20181119
+ * Version: 1.0.0+build20200421
  * Author: Manuel Schmalstieg
  * Author URI: https://ms-studio.net
  * License: GPL-2.0+
@@ -64,16 +64,13 @@ function ms_studio_protect_email_js() {
   ?>
 <script>
 // MS-Studio Protect Email
-jQuery(document).ready(function($){
-  $.fn.emailSpamProtection = function(className) {
-    return $(this).find("." + className).each(function() {
-      var $this = $(this);
-      var s = $this.text().replace(" [at] ", "&#64;");
-      $this.html("<a href=\"mailto:" + s + "\">" + s + "</a>");
-    });
-  };
-  $("body").emailSpamProtection("email");
-});
+var adresses = document.getElementsByClassName("email");
+
+for (i = 0; i < adresses.length; i++) {
+  var monAdresse = adresses[i].textContent;
+  monAdresse = monAdresse.replace(" [at] ", "@");
+  adresses[i].innerHTML = ("<a href='mailto:" + monAdresse + "'>" + monAdresse + "</a>");
+}
 </script>
 <?php
 
